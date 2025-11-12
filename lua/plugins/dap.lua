@@ -191,6 +191,7 @@ return {
   {
     "jay-babu/mason-nvim-dap.nvim",
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+    event = "VeryLazy", -- Load after other plugins to avoid race conditions
     config = function()
       require("mason-nvim-dap").setup({
         ensure_installed = {
@@ -199,7 +200,7 @@ return {
           "codelldb",    -- Rust/C++/Swift debugger
           "js-debug-adapter", -- JavaScript/TypeScript debugger
         },
-        automatic_installation = true,
+        automatic_installation = false, -- Prevent race conditions with mason-lspconfig
         handlers = {},
       })
     end,
