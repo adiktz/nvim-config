@@ -143,9 +143,29 @@ return {
 
       lspconfig.kotlin_language_server.setup({
         capabilities = capabilities,
-        root_dir = lspconfig.util.root_pattern("settings.gradle", "settings.gradle.kts", "build.gradle", "build.gradle.kts"),
+        root_dir = lspconfig.util.root_pattern(
+          "settings.gradle.kts",
+          "settings.gradle",
+          "build.gradle.kts",
+          "build.gradle",
+          ".git"
+        ),
         init_options = {
           storagePath = vim.fn.stdpath("data") .. "/kotlin_language_server",
+        },
+        settings = {
+          kotlin = {
+            -- Support for Kotlin Multiplatform source sets
+            compiler = {
+              jvm = {
+                target = "17",
+              },
+            },
+            -- Enable indexing of all source sets
+            indexing = {
+              enabled = true,
+            },
+          },
         },
       })
     end,

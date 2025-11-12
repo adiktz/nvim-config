@@ -13,6 +13,7 @@ Complete modern Neovim setup with LSP, Treesitter, Telescope, and more.
 │   │   ├── keymaps.lua        # Key bindings
 │   │   ├── ios-commands.lua   # iOS development commands
 │   │   ├── android-commands.lua # Android development commands
+│   │   ├── kmp-commands.lua   # Kotlin Multiplatform commands
 │   │   └── rn-commands.lua    # React Native commands
 │   └── plugins/
 │       ├── colorscheme.lua    # Catppuccin theme
@@ -390,7 +391,178 @@ Complete Android development environment with Java and Kotlin support.
 - Test runner integration
 - Code refactoring tools for Java
 
-### 12. React Native Development
+### 12. Kotlin Multiplatform (KMP)
+
+Complete Kotlin Multiplatform development environment for cross-platform mobile development.
+
+#### What is Kotlin Multiplatform?
+Kotlin Multiplatform allows you to share code between iOS, Android, and other platforms while keeping platform-specific code separate using expect/actual declarations.
+
+#### Project Structure Support
+KMP projects typically have this structure:
+```
+shared/
+  └── src/
+      ├── commonMain/kotlin/     - Shared code for all platforms
+      ├── commonTest/kotlin/     - Shared tests
+      ├── androidMain/kotlin/    - Android-specific implementations
+      ├── iosMain/kotlin/        - iOS-specific implementations
+      ├── jvmMain/kotlin/        - JVM-specific implementations
+      └── jsMain/kotlin/         - JavaScript-specific implementations
+
+androidApp/                       - Android application module
+iosApp/                           - iOS application module (Xcode)
+```
+
+#### Language Support
+- **Kotlin LSP** - Full language server support with KMP source set indexing
+- **Java 17 target** - Configured for modern Kotlin/JVM
+- **Multi-platform navigation** - Navigate between expect/actual declarations
+- **Gradle integration** - Full Gradle Kotlin DSL support
+
+#### Build & Run Commands
+
+**Keybindings:**
+- `Space + kb` - Build shared module (select task)
+- `Space + ka` - Run on Android
+- `Space + ki` - Run on iOS (builds framework + runs)
+- `Space + kc` - Clean KMP build
+
+**Commands:**
+- `:KMPBuildShared` - Build shared module (interactive task selection)
+- `:KMPRunAndroid` - Install and run Android app
+- `:KMPRuniOS` - Build iOS framework and run app
+- `:KMPClean` - Clean all build artifacts
+
+**Build Tasks Available:**
+- `assemble` - Build all variants
+- `assembleDebug` - Build debug variant
+- `assembleRelease` - Build release variant
+- `build` - Full build with tests
+
+#### Testing
+
+**Keybindings:**
+- `Space + kt` - Run tests (interactive selection)
+
+**Commands:**
+- `:KMPTest` - Select and run tests for specific platform
+
+**Test Targets:**
+- `allTests` - Run tests for all platforms
+- `commonTest` - Common shared tests
+- `androidTest` - Android-specific tests
+- `iosTest` - iOS-specific tests
+- `jvmTest` - JVM-specific tests
+- `jsTest` - JavaScript-specific tests
+
+#### iOS Framework Generation
+
+**Keybindings:**
+- `Space + kf` - Generate iOS framework
+
+**Commands:**
+- `:KMPiOSFramework` - Interactive iOS framework generation
+
+**Available Frameworks:**
+- `linkDebugFrameworkIosArm64` - Debug framework for physical devices
+- `linkReleaseFrameworkIosArm64` - Release framework for physical devices
+- `linkDebugFrameworkIosX64` - Debug for Intel simulators
+- `linkDebugFrameworkIosSimulatorArm64` - Debug for Apple Silicon simulators
+- `assembleXCFramework` - Universal XCFramework for all iOS targets
+
+#### Expect/Actual Declarations
+
+**Keybindings:**
+- `Space + ke` - Create expect/actual declarations
+
+**Commands:**
+- `:KMPExpectActual` - Interactive expect/actual creator
+
+Creates platform-specific implementations:
+```kotlin
+// commonMain/kotlin/Platform.kt
+expect class Platform {
+    fun getName(): String
+}
+
+// androidMain/kotlin/Platform.kt
+actual class Platform {
+    actual fun getName(): String = "Android"
+}
+
+// iosMain/kotlin/Platform.kt
+actual class Platform {
+    actual fun getName(): String = "iOS"
+}
+```
+
+#### Project Management
+
+**Keybindings:**
+- `Space + ks` - Show KMP project structure
+- `Space + kg` - Gradle sync/refresh dependencies
+- `Space + kT` - Show all KMP Gradle targets
+- `Space + kp` - Publish to Maven Local
+- `Space + kx` - Run custom Gradle task
+
+**Commands:**
+- `:KMPStructure` - Display KMP project structure guide
+- `:KMPSync` - Refresh Gradle dependencies
+- `:KMPTargets` - List all Kotlin Multiplatform tasks
+- `:KMPPublishLocal` - Publish shared module to Maven Local
+- `:KMPTask` - Run custom Gradle task (prompts for input)
+
+#### Workflow Examples
+
+**Starting a New KMP Project:**
+1. **Check structure:** `Space + ks`
+2. **Sync dependencies:** `Space + kg`
+3. **Build shared module:** `Space + kb` → select `assemble`
+4. **Run tests:** `Space + kt` → select `allTests`
+5. **Run on Android:** `Space + ka`
+6. **Generate iOS framework:** `Space + kf` → select appropriate target
+7. **Run on iOS:** `Space + ki`
+
+**Adding Platform-Specific Code:**
+1. **Create expect/actual:** `Space + ke`
+2. Enter class/function name
+3. Implement in `commonMain`, `androidMain`, `iosMain`
+4. **Build:** `Space + kb`
+5. **Test:** `Space + kt`
+
+**Publishing Shared Library:**
+1. **Build:** `Space + kb` → `build`
+2. **Test:** `Space + kt` → `allTests`
+3. **Publish:** `Space + kp`
+
+#### Integration with iOS/Android Commands
+
+KMP works seamlessly with existing iOS and Android commands:
+- Use `Space + as` to start Android emulator
+- Use `Space + is` to start iOS simulator
+- Use `Space + al` for Android logcat
+- Use Android/iOS debugging with `Space + db`
+
+#### Features
+- Full Kotlin LSP with KMP source set support
+- Gradle integration for all KMP tasks
+- iOS framework generation (debug/release, device/simulator)
+- Cross-platform test runner
+- Expect/actual declaration helpers
+- Maven Local publishing
+- Interactive task selection
+- Project structure visualization
+- Supports all KMP targets (Android, iOS, JVM, JS, Native)
+
+#### External Dependencies
+- Gradle (installed via gradlew or system)
+- Kotlin compiler (managed by Gradle)
+- Android SDK (for androidMain)
+- Xcode (for iosMain)
+- CocoaPods (for iOS dependencies, optional)
+
+### 13. React Native Development
 
 Complete React Native development environment with TypeScript, ESLint, and Metro bundler integration.
 
@@ -522,7 +694,7 @@ When using `Space + rc` or `:RNClean`, you can choose:
 7. **Open dev menu:** `Space + rdi` (iOS) or `Space + rda` (Android)
 8. **Clean if issues:** `Space + rc` (select clean option)
 
-### 13. Debugging (DAP)
+### 14. Debugging (DAP)
 
 Full debugging support for all configured languages using nvim-dap (Debug Adapter Protocol).
 

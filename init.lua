@@ -41,4 +41,7 @@ require("config.android-commands").setup()
 -- Load React Native development commands
 require("config.rn-commands").setup()
 
+-- Load Kotlin Multiplatform development commands
+require("config.kmp-commands").setup()
+
 print("Neovim configuration loaded successfully!")
