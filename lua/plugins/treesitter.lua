@@ -31,7 +31,6 @@ return {
           "objc",
           "java",
           "kotlin",
-          "gradle",
         },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
