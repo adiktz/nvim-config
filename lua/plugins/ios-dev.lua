@@ -22,10 +22,6 @@ return {
             simulator_name = nil,
           },
         },
-        daemon = {
-          -- Xbase daemon settings
-          enabled = true,
-        },
       })
 
       -- Xbase keymaps
