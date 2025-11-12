@@ -59,16 +59,13 @@ return {
       })
 
       -- Xcodebuild keymaps
-      local xcode = require("xcodebuild.actions")
-
-      vim.keymap.set("n", "<leader>xl", xcode.show_current_config, { desc = "Show Xcode Config" })
-      vim.keymap.set("n", "<leader>xB", xcode.build, { desc = "Build Project" })
-      vim.keymap.set("n", "<leader>xR", xcode.run, { desc = "Run App" })
-      vim.keymap.set("n", "<leader>xT", xcode.run_tests, { desc = "Run Tests" })
-      vim.keymap.set("n", "<leader>xS", xcode.select_scheme, { desc = "Select Scheme" })
-      vim.keymap.set("n", "<leader>xD", xcode.select_device, { desc = "Select Device" })
-      vim.keymap.set("n", "<leader>xC", xcode.clean_build, { desc = "Clean Build" })
-      vim.keymap.set("n", "<leader>xq", xcode.cancel_running_action, { desc = "Cancel Action" })
+      vim.keymap.set("n", "<leader>xB", "<cmd>XcodebuildBuild<cr>", { desc = "Build Project" })
+      vim.keymap.set("n", "<leader>xR", "<cmd>XcodebuildRun<cr>", { desc = "Run App" })
+      vim.keymap.set("n", "<leader>xT", "<cmd>XcodebuildTest<cr>", { desc = "Run Tests" })
+      vim.keymap.set("n", "<leader>xS", "<cmd>XcodebuildSelectScheme<cr>", { desc = "Select Scheme" })
+      vim.keymap.set("n", "<leader>xD", "<cmd>XcodebuildSelectDevice<cr>", { desc = "Select Device" })
+      vim.keymap.set("n", "<leader>xC", "<cmd>XcodebuildClean<cr>", { desc = "Clean Build" })
+      vim.keymap.set("n", "<leader>xl", "<cmd>XcodebuildShowConfig<cr>", { desc = "Show Xcode Config" })
     end,
   },
 }
