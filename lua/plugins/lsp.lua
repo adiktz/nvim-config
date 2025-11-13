@@ -32,6 +32,7 @@ return {
           "gopls",        -- Go
           "jdtls",        -- Java
           "kotlin_language_server", -- Kotlin
+          "gradle_ls",    -- Gradle
           "html",         -- HTML
           "cssls",        -- CSS
           "jsonls",       -- JSON
@@ -163,6 +164,15 @@ return {
         },
         rust_analyzer = {},
         gopls = {},
+        gradle_ls = {
+          init_options = {
+            settings = {
+              gradleWrapperEnabled = true,
+            },
+          },
+          filetypes = { "groovy", "gradle" },
+          root_dir = lspconfig.util.root_pattern("settings.gradle", "settings.gradle.kts", "build.gradle", "build.gradle.kts"),
+        },
         html = {},
         cssls = {},
         jsonls = {},
