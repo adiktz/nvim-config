@@ -108,14 +108,17 @@ return {
         },
       })
 
-      -- Register leader key groups
+      -- Register leader key groups with clear descriptions
       wk.add({
-        { "<leader>f", group = "Find" },
-        { "<leader>g", group = "Git" },
-        { "<leader>d", group = "Debug" },
-        { "<leader>p", group = "Python" },
-        { "<leader>s", group = "Split" },
-        { "<leader>e", group = "Explorer" },
+        { "<leader>f", group = "🔍 Find/Search" },
+        { "<leader>g", group = "🌿 Git" },
+        { "<leader>d", group = "🐛 Debug/Diagnostics" },
+        { "<leader>p", group = "🐍 Python" },
+        { "<leader>j", group = "📓 Jupyter" },
+        { "<leader>t", group = "💻 Terminal" },
+        { "<leader>s", group = "⬌ Split Windows" },
+        { "<leader>c", group = "💡 Code Actions" },
+        { "<leader>r", group = "✏️  Rename/Refactor" },
       })
     end,
   },
