@@ -1,0 +1,18 @@
+# Neovim
+lazy-lock.json
+.luarc.json
+
+# LSP and Mason
+.local/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Swap files
+*.swp
+*.swo
+*.swn
