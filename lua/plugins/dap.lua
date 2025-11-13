@@ -88,6 +88,12 @@ return {
         },
       }
 
+      -- LLDB DAP adapter for iOS debugging (official Xcode debugger)
+      dap.adapters["lldb-dap"] = {
+        type = "executable",
+        command = "lldb-dap", -- Use system lldb-dap from Xcode
+      }
+
       dap.configurations.rust = {
         {
           name = "Launch file",
@@ -103,11 +109,22 @@ return {
 
       dap.configurations.swift = {
         {
-          name = "Launch iOS App",
+          name = "iOS Debug (lldb-dap)",
+          type = "lldb-dap",
+          request = "launch",
+          program = function()
+            -- Prompt for the executable path
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/build/", "file")
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+          runInTerminal = false,
+        },
+        {
+          name = "iOS Debug (CodeLLDB)",
           type = "codelldb",
           request = "launch",
           program = function()
-            -- Try to find the built iOS app
             local app_path = vim.fn.input("Path to .app: ", vim.fn.getcwd() .. "/build/", "file")
             return app_path
           end,

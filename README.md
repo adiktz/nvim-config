@@ -295,6 +295,51 @@ Complete iOS and Swift development environment with Xcode integration.
 **Commands:**
 - `:SwiftLint` - Run SwiftLint on current file
 
+#### iOS Debugging
+**Debugger Support:**
+- **lldb-dap** - Official Xcode debugger (recommended)
+- **CodeLLDB** - Alternative LLDB debugger
+
+**Setup Requirements:**
+- ✅ xcode-build-server (installed) - Required for sourcekit-lsp with Xcode projects
+- ✅ xcbeautify (installed) - Better Xcode log formatting
+- ✅ fd (installed) - Fast file finder, improves search performance
+- ✅ coreutils (installed) - Includes stdbuf for app logs
+
+**Debugging Keybindings:**
+- `Space + db` - Toggle breakpoint
+- `Space + dc` - Start/Continue debugging
+- `Space + di` - Step into
+- `Space + do` - Step over
+- `Space + dO` - Step out
+- `Space + dt` - Terminate debugging
+- `Space + du` - Toggle debug UI
+- `Space + de` - Evaluate expression
+
+**How to Debug iOS Apps:**
+1. Build your Xcode project first: `Space + xB`
+2. Open a Swift file and set breakpoints: `Space + db`
+3. Start debugging: `Space + dc`
+4. Select debug configuration:
+   - **iOS Debug (lldb-dap)** - Use for Xcode projects (recommended)
+   - **iOS Debug (CodeLLDB)** - Alternative debugger
+5. Enter path to your built executable or .app bundle
+6. Debug UI opens automatically with variables, stack, etc.
+7. Use step commands to navigate through code
+
+**Xcode Project Setup:**
+After opening an Xcode project, run:
+```bash
+xcode-build-server config -project YourProject.xcodeproj -scheme YourScheme
+```
+This creates `buildServer.json` for proper LSP integration.
+
+**Physical Device Debugging (Optional):**
+Install pymobiledevice3 for iOS 17+ device debugging:
+```bash
+pip3 install pymobiledevice3
+```
+
 #### Features
 - Automatic code formatting on save
 - Real-time diagnostics and error checking
